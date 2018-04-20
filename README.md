@@ -8,7 +8,7 @@
 - ssh to your machine
 - make sure you're root or user with sudo
 - `yum install git`
-- `git clone <THIS REPO URL>`
+- `git clone https://github.com/emkor/openstack-on-hp-z600.git`
 - `cd openstack-on-hp-z600`
 - `chmod u+x ./main.sh`
 - `./main.sh`
