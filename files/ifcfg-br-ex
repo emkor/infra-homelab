@@ -1,0 +1,10 @@
+DEVICE=br-ex
+DEVICETYPE=ovs
+TYPE=OVSBridge
+BOOTPROTO=static
+IPADDR=192.168.192.250  # Old eth0 IP since we want the network restart to not
+                        # kill the connection, otherwise pick something outside your dhcp range
+NETMASK=255.255.254.0   # your netmask
+GATEWAY=192.168.192.254 # your gateway
+DNS1=192.168.192.254    # your nameserver
+ONBOOT=yes
