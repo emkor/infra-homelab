@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 yum install -y sudo wget curl nano vim htop
 
 sudo systemctl disable firewalld
