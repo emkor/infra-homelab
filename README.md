@@ -4,7 +4,7 @@ This is an example of installing OpenStack using Packstack on local machine with
 ### Prerequisites
 - capable piece of hardware (my setup is on HP Z600 workstation)
 - CentOS 7
-- Specific network setup, so it's possible to use few IP addresses for your OpenStack VMs
+- Specific network setup, so it's possible to use few IP addresses for your OpenStack VMs (TO DO)
 
 ### Usage:
 - ssh to your machine
