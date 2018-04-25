@@ -14,17 +14,25 @@ sudo systemctl stop NetworkManager
 sudo systemctl enable network
 sudo systemctl start network
 
+# for some reason, pip did not worked correctly out of the box in CentOS
+wget https://bootstrap.pypa.io/ez_setup.py -O - | python
+
+# disable SELinux
+sed -i "s/SELINUX=.*/SELINUX=permissive/g" /etc/sysconfig/selinux
+sed -i "s/SELINUXTYPE=.*/SELINUXTYPE=targeted/g" /etc/sysconfig/selinux
+
 sudo yum install -y centos-release-openstack-queens
 sudo yum update -y
 sudo yum install -y openstack-packstack
 
-wget https://bootstrap.pypa.io/ez_setup.py -O - | python
+
 packstack --allinone --provision-demo=n --os-neutron-ovs-bridge-mappings=extnet:br-ex --os-neutron-ovs-bridge-interfaces=br-ex:enp1s0 --os-neutron-ml2-type-drivers=vxlan,flat
 
 sudo cp files/ifcfg-br-ex /etc/sysconfig/network-scripts/ifcfg-br-ex
 sudo cp files/ifcfg-enp1s0 /etc/sysconfig/network-scripts/ifcfg-enp1s0
 systemctl restart network
 
+cd ~
 source keystonerc_admin
 neutron net-create external_network --provider:network_type flat --provider:physical_network extnet  --router:external
 neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.193.1,end=192.168.193.250 \
