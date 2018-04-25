@@ -23,3 +23,17 @@ sed -i "s/workers.*=.*/workers=6/g" /etc/swift/object-server.conf
 sed -i "s/api_workers.*=.*/api_workers=6/g" /etc/neutron/neutron.conf
 sed -i "s/rpc_workers.*=.*/rpc_workers=6/g" /etc/neutron/neutron.conf
 sed -i "s/osapi_volume_worker.*=.*/osapi_volume_worker=6/g" /etc/cinder/cinder.conf
+
+# change allocation ratio to more strict
+sed -i "s/cpu_allocation_ratio.*=.*/cpu_allocation_ratio=2.0/g" /etc/nova/nova.conf
+sed -i "s/ram_allocation_ratio.*=.*/ram_allocation_ratio=1.0/g" /etc/nova/nova.conf
+
+# create development project, add guest user, update project quotas, disable admin project
+cd ~
+source ~/keystonerc_admin
+openstack project create --description 'development' development --domain default --enable
+openstack role add --user admin --project development admin
+openstack quota set --instances 40 --key-pairs 20 --floating-ips 40 --cores 40 --ram 40960 --gigabytes 400 --volumes 20 --per-volume-gigabytes 40 --snapshots 10 development
+openstack user create --project development --password guest guest
+openstack role add --user guest --project development _member_
+openstack project set admin --disable

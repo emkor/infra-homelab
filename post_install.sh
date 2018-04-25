@@ -12,7 +12,7 @@ systemctl restart network
 sed -i "s/#dnsmasq_dns_servers =/dnsmasq_dns_servers = 1.1.1.1, 8.8.8.8, 8.8.4.4/g" /etc/neutron/dhcp_agent.ini
 
 cd ~
-source keystonerc_admin
+source ~/keystonerc_admin
 neutron net-create external_network --provider:network_type flat --provider:physical_network extnet  --router:external
 neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.193.1,end=192.168.193.250 \
                         --gateway=192.168.192.254 external_network 192.168.192.0/23
