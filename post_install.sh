@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd ~/openstack-on-hp-z600
+
+sudo cp files/ifcfg-br-ex /etc/sysconfig/network-scripts/ifcfg-br-ex
+sudo cp files/ifcfg-enp1s0 /etc/sysconfig/network-scripts/ifcfg-enp1s0
+systemctl restart network
+
+# insert DNS addresses for OpenStack compute instances so those can reach Internet
+sed -i "s/#dnsmasq_dns_servers =/dnsmasq_dns_servers = 1.1.1.1, 8.8.8.8, 8.8.4.4/g" /etc/neutron/dhcp_agent.ini
+
+cd ~
+source keystonerc_admin
+neutron net-create external_network --provider:network_type flat --provider:physical_network extnet  --router:external
+neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.193.1,end=192.168.193.250 \
+                        --gateway=192.168.192.254 external_network 192.168.192.0/23
+
+neutron router-create main_router
+neutron router-gateway-set main_router external_network
+
+neutron net-create private_network
+neutron subnet-create --name private_subnet private_network 172.16.0.0/16
+neutron router-interface-add main_router private_subnet

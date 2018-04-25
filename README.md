@@ -15,5 +15,8 @@ This is an example of installing OpenStack using Packstack on local machine with
 - `cd openstack-on-hp-z600`
 - `chmod u+x ./*.sh`
 - `./pre_install.sh`
+- reboot the machine now, ssh to it again, enter the code dir with `cd openstack-on-hp-z600`
 - `./install.sh`
 - be patient!
+- `./post_install.sh`
+- optionally, do `./configure.sh`
