@@ -20,3 +20,4 @@ This is an example of installing OpenStack using Packstack on local machine with
 - be patient!
 - `./post_install.sh`
 - optionally, do `./configure.sh`
+- optionally, do `./create_base_images.sh`
