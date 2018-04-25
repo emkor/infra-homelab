@@ -2,10 +2,13 @@
 
 set -e
 
-yum install -y sudo wget curl nano vim htop
+yum install -y sudo wget curl nano vim
 
+# disable firewalld
 sudo systemctl disable firewalld
 sudo systemctl stop firewalld
+
+# replace NetworkManager with network
 sudo systemctl disable NetworkManager
 sudo systemctl stop NetworkManager
 sudo systemctl enable network
