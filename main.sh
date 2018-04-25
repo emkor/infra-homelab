@@ -47,10 +47,9 @@ systemctl stop openstack-ceilometer-polling && systemctl disable openstack-ceilo
 systemctl stop openstack-gnocchi-metricd && systemctl disable openstack-gnocchi-metricd
 systemctl stop openstack-gnocchi-statsd && systemctl disable openstack-gnocchi-statsd
 
-
+# set worker count for each service to 6
 sed -i "s/workers.*=.*/workers=6/g" /etc/glance/glance-api.conf
 sed -i "s/workers.*=.*/workers=6/g" /etc/glance/glance-registry.conf
-
 sed -i "s/workers.*=.*/workers=6/g" /etc/nova/nova.conf
 sed -i "s/workers.*=.*/workers=6/g" /etc/swift/proxy-server.conf
 sed -i "s/workers.*=.*/workers=6/g" /etc/swift/account-server.conf

@@ -1,4 +1,5 @@
 # Installing OpenStack with Packstack (home cloud PoC)
+## WARNING: WORK IN PROGRESS
 This is an example of installing OpenStack using Packstack on local machine within your LAN (homelab purposes)
 
 ### Prerequisites
