@@ -13,6 +13,7 @@ This is an example of installing OpenStack using Packstack on local machine with
 - `yum install git`
 - `git clone https://github.com/emkor/openstack-on-hp-z600.git`
 - `cd openstack-on-hp-z600`
-- `chmod u+x ./main.sh`
-- `./main.sh`
+- `chmod u+x ./*.sh`
+- `./pre_install.sh`
+- `./install.sh`
 - be patient!
