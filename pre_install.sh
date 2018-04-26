@@ -20,3 +20,5 @@ wget https://bootstrap.pypa.io/ez_setup.py -O - | python
 # disable SELinux
 sed -i "s/SELINUX=.*/SELINUX=permissive/g" /etc/sysconfig/selinux
 sed -i "s/SELINUXTYPE=.*/SELINUXTYPE=targeted/g" /etc/sysconfig/selinux
+sed -i "s/SELINUX=.*/SELINUX=permissive/g" /etc/selinux/config
+sed -i "s/SELINUXTYPE=.*/SELINUXTYPE=targeted/g" /etc/selinux/config
