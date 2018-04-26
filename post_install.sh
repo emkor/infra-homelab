@@ -27,3 +27,31 @@ neutron router-gateway-set main_router external_network
 neutron net-create private_network
 neutron subnet-create --name private_subnet private_network 172.16.0.0/16
 neutron router-interface-add main_router private_subnet
+
+cd ~/openstack-on-hp-z600
+openstack keypair create --public-key ./files/openstack-niemcewicza.pub
+
+openstack security group create --description "Open ICMP, SSH, HTTP, HTTPS etc." --project development development
+openstack security group rule create --ingress --protocol icmp --remote-ip 0.0.0.0/0 --project development development
+openstack security group rule create --egress --protocol icmp --remote-ip 0.0.0.0/0 --project development development
+
+openstack security group rule create --ingress --protocol tcp --dst-port 22 --remote-ip 0.0.0.0/0 --project development development
+openstack security group rule create --egress --protocol tcp --dst-port 22 --remote-ip 0.0.0.0/0 --project development development
+
+openstack security group rule create --ingress --protocol tcp --dst-port 80 --remote-ip 0.0.0.0/0 --project development development
+openstack security group rule create --egress --protocol tcp --dst-port 80 --remote-ip 0.0.0.0/0 --project development development
+
+openstack security group rule create --ingress --protocol tcp --dst-port 443 --remote-ip 0.0.0.0/0 --project development development
+openstack security group rule create --egress --protocol tcp --dst-port 443 --remote-ip 0.0.0.0/0 --project development development
+
+openstack security group rule create --ingress --protocol tcp --dst-port 800 --remote-ip 0.0.0.0/0 --project development development
+openstack security group rule create --egress --protocol tcp --dst-port 800 --remote-ip 0.0.0.0/0 --project development development
+
+openstack security group rule create --ingress --protocol tcp --dst-port 8080 --remote-ip 0.0.0.0/0 --project development development
+openstack security group rule create --egress --protocol tcp --dst-port 8080 --remote-ip 0.0.0.0/0 --project development development
+
+openstack security group rule create --ingress --protocol tcp --dst-port 3306 --remote-ip 0.0.0.0/0 --project development development
+openstack security group rule create --egress --protocol tcp --dst-port 3306 --remote-ip 0.0.0.0/0 --project development development
+
+openstack security group rule create --ingress --protocol tcp --dst-port 5432 --remote-ip 0.0.0.0/0 --project development development
+openstack security group rule create --egress --protocol tcp --dst-port 5432 --remote-ip 0.0.0.0/0 --project development development
