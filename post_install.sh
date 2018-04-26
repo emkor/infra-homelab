@@ -5,7 +5,7 @@ set -e
 cd ~/openstack-on-hp-z600
 
 # insert DNS addresses for OpenStack compute instances so those can reach Internet
-sed -i "s/#dnsmasq_dns_servers =/dnsmasq_dns_servers = 1.1.1.1, 8.8.8.8, 8.8.4.4/g" /etc/neutron/dhcp_agent.ini
+sed -i "s/#dnsmasq_dns_servers =/dnsmasq_dns_servers = 192.168.192.254/g" /etc/neutron/dhcp_agent.ini
 
 cd ~
 source ~/keystonerc_admin
@@ -29,7 +29,7 @@ neutron subnet-create --name private_subnet private_network 172.16.0.0/16
 neutron router-interface-add main_router private_subnet
 
 cd ~/openstack-on-hp-z600
-openstack keypair create --public-key ./files/openstack-niemcewicza.pub
+openstack keypair create --public-key ./files/openstack-hpz600.pub openstack-hpz600
 
 openstack security group create --description "Open ICMP, SSH, HTTP, HTTPS etc." --project development development
 openstack security group rule create --ingress --protocol icmp --remote-ip 0.0.0.0/0 --project development development
@@ -55,3 +55,4 @@ openstack security group rule create --egress --protocol tcp --dst-port 3306 --r
 
 openstack security group rule create --ingress --protocol tcp --dst-port 5432 --remote-ip 0.0.0.0/0 --project development development
 openstack security group rule create --egress --protocol tcp --dst-port 5432 --remote-ip 0.0.0.0/0 --project development development
+
