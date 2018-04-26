@@ -4,10 +4,6 @@ set -e
 
 cd ~/openstack-on-hp-z600
 
-sudo cp files/ifcfg-br-ex /etc/sysconfig/network-scripts/ifcfg-br-ex
-sudo cp files/ifcfg-enp1s0 /etc/sysconfig/network-scripts/ifcfg-enp1s0
-systemctl restart network
-
 # insert DNS addresses for OpenStack compute instances so those can reach Internet
 sed -i "s/#dnsmasq_dns_servers =/dnsmasq_dns_servers = 1.1.1.1, 8.8.8.8, 8.8.4.4/g" /etc/neutron/dhcp_agent.ini
 
@@ -23,7 +19,7 @@ openstack user create --project development --password guest --enable guest
 openstack role add --user guest --project development _member_
 openstack quota set --instances 40 --key-pairs 20 --floating-ips 40 --cores 40 --ram 40960 --gigabytes 400 --volumes 20 --per-volume-gigabytes 40 --snapshots 10 development
 
-export OS_TENANT_NAME=development
+export OS_PROJECT_NAME=development
 
 neutron router-create main_router
 neutron router-gateway-set main_router external_network
