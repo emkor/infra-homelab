@@ -2,7 +2,8 @@
 
 set -e
 
-yum install -y sudo wget curl nano vim
+yum install -y epel-release
+yum install -y sudo wget curl nano vim htop
 
 # disable firewalld
 sudo systemctl disable firewalld
