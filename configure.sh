@@ -31,11 +31,6 @@ sed -i "s/ram_allocation_ratio.*=.*/ram_allocation_ratio=1.0/g" /etc/nova/nova.c
 # create development project, add guest user, update project quotas, disable admin project
 cd ~
 source ~/keystonerc_admin
-openstack project create --description 'development' development --domain default --enable
-openstack role add --user admin --project development admin
-openstack quota set --instances 40 --key-pairs 20 --floating-ips 40 --cores 40 --ram 40960 --gigabytes 400 --volumes 20 --per-volume-gigabytes 40 --snapshots 10 development
-openstack user create --project development --password guest guest
-openstack role add --user guest --project development _member_
 
 openstack service delete aodh
 openstack service delete gnocchi
