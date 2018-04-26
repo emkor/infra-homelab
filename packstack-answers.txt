@@ -1175,7 +1175,7 @@ CONFIG_HEAT_KS_PW=PW_PLACEHOLDER
 
 # Specify 'y' to install the Orchestration CloudFormation API. ['y',
 # 'n']
-CONFIG_HEAT_CFN_INSTALL=y
+CONFIG_HEAT_CFN_INSTALL=n
 
 # Name of the Identity domain for Orchestration.
 CONFIG_HEAT_DOMAIN=heat
