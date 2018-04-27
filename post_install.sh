@@ -7,6 +7,9 @@ cd ~/openstack-on-hp-z600
 # insert DNS addresses for OpenStack compute instances so those can reach Internet
 sed -i "s/#dnsmasq_dns_servers =/dnsmasq_dns_servers = 192.168.192.254/g" /etc/neutron/dhcp_agent.ini
 
+mkdir -p ~/.ssh
+cp ./files/ssh_config ~/.ssh/config
+
 cd ~
 source ~/keystonerc_admin
 neutron net-create external_network --provider:network_type flat --provider:physical_network extnet  --router:external --shared
