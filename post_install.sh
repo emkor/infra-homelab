@@ -56,3 +56,4 @@ openstack security group rule create --egress --protocol tcp --dst-port 3306 --r
 openstack security group rule create --ingress --protocol tcp --dst-port 5432 --remote-ip 0.0.0.0/0 --project development development
 openstack security group rule create --egress --protocol tcp --dst-port 5432 --remote-ip 0.0.0.0/0 --project development development
 
+# TO DO: flavor updates
