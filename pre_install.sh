@@ -6,14 +6,14 @@ yum install -y epel-release
 yum install -y sudo wget curl nano vim htop
 
 # disable firewalld
-sudo systemctl disable firewalld
-sudo systemctl stop firewalld
+systemctl disable firewalld
+systemctl stop firewalld
 
 # replace NetworkManager with network
-sudo systemctl disable NetworkManager
-sudo systemctl stop NetworkManager
-sudo systemctl enable network
-sudo systemctl start network
+systemctl disable NetworkManager
+systemctl stop NetworkManager
+systemctl enable network
+systemctl start network
 
 # for some reason, pip did not worked correctly out of the box in CentOS
 wget https://bootstrap.pypa.io/ez_setup.py -O - | python
