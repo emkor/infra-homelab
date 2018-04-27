@@ -59,4 +59,16 @@ openstack security group rule create --egress --protocol tcp --dst-port 3306 --r
 openstack security group rule create --ingress --protocol tcp --dst-port 5432 --remote-ip 0.0.0.0/0 --project development development
 openstack security group rule create --egress --protocol tcp --dst-port 5432 --remote-ip 0.0.0.0/0 --project development development
 
-# TO DO: flavor updates
+# re-create default m1 flavors
+openstack flavor delete m1.tiny
+openstack flavor create --public --vcpus=1 --ram=512 --disk=2 m1.tiny
+openstack flavor delete m1.small
+openstack flavor create --public --vcpus=1 --ram=1024 --disk=5 m1.small
+openstack flavor delete m1.medium
+openstack flavor create --public --vcpus=2 --ram=2048 --disk=10 m1.medium
+openstack flavor delete m1.large
+openstack flavor create --public --vcpus=4 --ram=4096 --disk=20 m1.large
+openstack flavor delete m1.xlarge
+openstack flavor create --public --vcpus=8 --ram=8192 --disk=40 m1.xlarge
+openstack flavor delete m1.xxlarge
+openstack flavor create --public --vcpus=16 --ram=16384 --disk=80 m1.xxlarge
