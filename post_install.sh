@@ -72,3 +72,10 @@ openstack flavor delete m1.xlarge
 openstack flavor create --public --vcpus=8 --ram=8192 --disk=40 m1.xlarge
 openstack flavor delete m1.xxlarge
 openstack flavor create --public --vcpus=16 --ram=16384 --disk=80 m1.xxlarge
+
+# create compute-specific c1 flavors
+openstack flavor create --public --vcpus=2 --ram=1024 --disk=2 c1.small
+openstack flavor create --public --vcpus=4 --ram=2048 --disk=4 c1.medium
+openstack flavor create --public --vcpus=8 --ram=4096 --disk=8 c1.large
+openstack flavor create --public --vcpus=16 --ram=8192 --disk=16 c1.xlarge
+openstack flavor create --public --vcpus=32 --ram=16384 --disk=32 c1.xxlarge
