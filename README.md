@@ -1,5 +1,4 @@
 # Installing OpenStack with Packstack (home cloud PoC)
-## WARNING: WORK IN PROGRESS
 This is an example of installing OpenStack using Packstack on local machine so OpenStack VMs are reachable from my LAN (homelab purposes)
 
 Part of instructions are from [rdoproject](https://www.rdoproject.org/install/packstack/)
