@@ -1,9 +1,11 @@
 # Installing OpenStack with Packstack (home cloud PoC)
 ## WARNING: WORK IN PROGRESS
-This is an example of installing OpenStack using Packstack on local machine within LAN (homelab purposes)
+This is an example of installing OpenStack using Packstack on local machine so OpenStack VMs are reachable from my LAN (homelab purposes)
+
+Part of instructions are from [rdoproject](https://www.rdoproject.org/install/packstack/)
 
 ### Prerequisites
-- capable piece of hardware (my setup is on HP Z600 workstation, dual CPU)
+- capable piece of hardware (my setup is on HP Z600 workstation, dual CPU, 48 gigs of memory)
 - CentOS 7 Minimal install
 - Specific network setup, so it's possible to use few IP addresses for your OpenStack VMs
 
