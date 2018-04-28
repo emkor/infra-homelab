@@ -43,7 +43,7 @@ Network setup should have some spare addresses for OpenStack instances outside o
     - downloads and creates images for Debians 8 and 9, Centos 7, CoreOS, Ubuntus 16.04 and 17.10
 
 ### What you'll end up with
-- OpenStack instance installed at 192.168.192.250 (SSH-able and HTTP-able)
+- OpenStack instance installed at 192.168.192.250 (SSH-able as root and HTTP-able as either admin or guest)
 - OpenStack will have following services: Keystone, Horizon, Neutron, Nova, Glance, Cinder
 - OpenStack uses 192.168.193.1-192.168.193.254 address range as Floating IPs; those are "public IPs" for VMs, reachable from local network
 - OpenStack uses 172.16.0.0/16 network range as its internal network; those IPs are not reachable from my LAN
