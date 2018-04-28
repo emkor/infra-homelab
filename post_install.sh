@@ -34,6 +34,17 @@ neutron router-interface-add main_router private_subnet
 cd ~/openstack-on-hp-z600
 openstack keypair create --public-key ./files/openstack-hpz600.pub openstack-hpz600
 
+openstack floating ip create --floating-ip-address 192.168.193.1 external_network
+openstack floating ip create --floating-ip-address 192.168.193.2 external_network
+openstack floating ip create --floating-ip-address 192.168.193.3 external_network
+openstack floating ip create --floating-ip-address 192.168.193.4 external_network
+openstack floating ip create --floating-ip-address 192.168.193.5 external_network
+openstack floating ip create --floating-ip-address 192.168.193.6 external_network
+openstack floating ip create --floating-ip-address 192.168.193.7 external_network
+openstack floating ip create --floating-ip-address 192.168.193.8 external_network
+openstack floating ip create --floating-ip-address 192.168.193.9 external_network
+openstack floating ip create --floating-ip-address 192.168.193.10 external_network
+
 openstack security group create --description "Open ICMP, SSH, HTTP, HTTPS etc." --project development development
 openstack security group rule create --ingress --protocol icmp --remote-ip 0.0.0.0/0 --project development development
 openstack security group rule create --egress --protocol icmp --remote-ip 0.0.0.0/0 --project development development
