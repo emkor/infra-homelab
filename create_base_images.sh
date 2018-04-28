@@ -30,5 +30,5 @@ glance image-create --name UbuntuServer16_04 --disk-format qcow2 --container-for
 rm ubuntu-16.04.img
 
 wget  http://cloud-images.ubuntu.com/releases/server/17.10/release/ubuntu-17.10-server-cloudimg-amd64.img -O ubuntu-17.10.img
-glance image-create --name UbuntuServer16_04 --disk-format qcow2 --container-format bare --visibility public --protected True --file ./ubuntu-17.10.img
+glance image-create --name UbuntuServer17_10 --disk-format qcow2 --container-format bare --visibility public --protected True --file ./ubuntu-17.10.img
 rm ubuntu-17.10.img
