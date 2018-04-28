@@ -3,6 +3,8 @@
 set -e
 
 source ~/keystonerc_admin
+export OS_PROJECT_NAME=development
+
 mkdir ~/image && cd ~/image
 
 # download and create images for Centos 7, Debian 8 and Debian 9

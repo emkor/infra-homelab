@@ -20,7 +20,7 @@ openstack project create --enable development
 openstack role add --user admin --project development admin
 openstack user create --project development --password guest --enable guest
 openstack role add --user guest --project development _member_
-openstack quota set --instances 40 --key-pairs 20 --floating-ips 40 --cores 40 --ram 40960 --gigabytes 400 --volumes 20 --per-volume-gigabytes 40 --snapshots 10 development
+openstack quota set --instances 40 --key-pairs 20 --floating-ips 40 --cores 40 --ram 40960 --gigabytes 400 --volumes 40 --per-volume-gigabytes 40 --snapshots 20 development
 
 export OS_PROJECT_NAME=development
 
