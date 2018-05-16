@@ -6,6 +6,7 @@ cd ~/openstack-on-hp-z600
 
 # insert DNS addresses for OpenStack compute instances so those can reach Internet
 sed -i "s/#dnsmasq_dns_servers =/dnsmasq_dns_servers = 192.168.192.254/g" /etc/neutron/dhcp_agent.ini
+sed -i "s/#cpu_allocation_ratio=/cpu_allocation_ratio=4.0/g" /etc/nova/nova.conf
 
 mkdir -p ~/.ssh
 cp ./files/ssh_config ~/.ssh/config
@@ -20,7 +21,7 @@ openstack project create --enable development
 openstack role add --user admin --project development admin
 openstack user create --project development --password guest --enable guest
 openstack role add --user guest --project development _member_
-openstack quota set --instances 40 --key-pairs 20 --floating-ips 40 --cores 40 --ram 40960 --gigabytes 400 --volumes 40 --per-volume-gigabytes 40 --snapshots 20 development
+openstack quota set --instances 40 --key-pairs 20 --floating-ips 40 --cores 80 --ram 40960 --gigabytes 400 --volumes 20 --per-volume-gigabytes 40 --snapshots 40 development
 
 export OS_PROJECT_NAME=development
 
