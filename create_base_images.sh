@@ -31,7 +31,7 @@ glance image-create --name Ubuntu-16-04 --architecture x86_64 --disk-format qcow
 rm ubuntu-16.04.img
 
 wget http://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img -O ubuntu-18.04.img
-glance image-create --name Ubuntu-18-04 --architecture x86_64 --disk-format qcow2 --container-format bare --visibility public --protected --min-disk 4 True --file ./ubuntu-18.04.img
+glance image-create --name Ubuntu-18-04 --architecture x86_64 --disk-format qcow2 --container-format bare --visibility public --protected True --min-disk 4 --file ./ubuntu-18.04.img
 rm ubuntu-18.04.img
 
 # to be able to remove image:
