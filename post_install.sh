@@ -49,27 +49,26 @@ openstack floating ip create --floating-ip-address 192.168.193.10 external_netwo
 openstack security group create --description "Open ICMP, SSH, HTTP, HTTPS etc." --project development development
 openstack security group rule create --ingress --protocol icmp --remote-ip 0.0.0.0/0 --project development development
 openstack security group rule create --egress --protocol icmp --remote-ip 0.0.0.0/0 --project development development
-
 openstack security group rule create --ingress --protocol tcp --dst-port 22 --remote-ip 0.0.0.0/0 --project development development
 openstack security group rule create --egress --protocol tcp --dst-port 22 --remote-ip 0.0.0.0/0 --project development development
-
 openstack security group rule create --ingress --protocol tcp --dst-port 80 --remote-ip 0.0.0.0/0 --project development development
 openstack security group rule create --egress --protocol tcp --dst-port 80 --remote-ip 0.0.0.0/0 --project development development
-
 openstack security group rule create --ingress --protocol tcp --dst-port 443 --remote-ip 0.0.0.0/0 --project development development
 openstack security group rule create --egress --protocol tcp --dst-port 443 --remote-ip 0.0.0.0/0 --project development development
-
 openstack security group rule create --ingress --protocol tcp --dst-port 800 --remote-ip 0.0.0.0/0 --project development development
 openstack security group rule create --egress --protocol tcp --dst-port 800 --remote-ip 0.0.0.0/0 --project development development
-
 openstack security group rule create --ingress --protocol tcp --dst-port 8080 --remote-ip 0.0.0.0/0 --project development development
 openstack security group rule create --egress --protocol tcp --dst-port 8080 --remote-ip 0.0.0.0/0 --project development development
-
 openstack security group rule create --ingress --protocol tcp --dst-port 3306 --remote-ip 0.0.0.0/0 --project development development
 openstack security group rule create --egress --protocol tcp --dst-port 3306 --remote-ip 0.0.0.0/0 --project development development
-
 openstack security group rule create --ingress --protocol tcp --dst-port 5432 --remote-ip 0.0.0.0/0 --project development development
 openstack security group rule create --egress --protocol tcp --dst-port 5432 --remote-ip 0.0.0.0/0 --project development development
+
+openstack security group create --description "TCP ports (range 1-65535) + ICMP opened" --project development all-open
+openstack security group rule create --ingress --protocol icmp --remote-ip 0.0.0.0/0 --project development all-open
+openstack security group rule create --egress --protocol icmp --remote-ip 0.0.0.0/0 --project development all-open
+openstack security group rule create --ingress --protocol tcp --dst-port 1:65535 --remote-ip 0.0.0.0/0 --project development all-open
+openstack security group rule create --egress --protocol tcp --dst-port 1:65535 --remote-ip 0.0.0.0/0 --project development all-open
 
 # re-create default m1 flavors
 openstack flavor delete m1.tiny
