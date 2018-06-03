@@ -726,7 +726,7 @@ CONFIG_NOVA_MANAGE_FLAVORS=y
 
 # Overcommitment ratio for virtual to physical CPUs. Specify 1.0 to
 # disable CPU overcommitment.
-CONFIG_NOVA_SCHED_CPU_ALLOC_RATIO=2.0
+CONFIG_NOVA_SCHED_CPU_ALLOC_RATIO=4.0
 
 # Overcommitment ratio for virtual to physical RAM. Specify 1.0 to
 # disable RAM overcommitment.

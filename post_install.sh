@@ -6,7 +6,6 @@ cd ~/openstack-on-hp-z600
 
 # insert DNS addresses for OpenStack compute instances so those can reach Internet
 sed -i "s/#dnsmasq_dns_servers =/dnsmasq_dns_servers = 192.168.192.254/g" /etc/neutron/dhcp_agent.ini
-sed -i "s/#cpu_allocation_ratio=/cpu_allocation_ratio=4.0/g" /etc/nova/nova.conf
 
 mkdir -p ~/.ssh
 cp ./files/ssh_config ~/.ssh/config
