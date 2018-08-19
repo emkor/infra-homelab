@@ -57,7 +57,7 @@ CONFIG_PANKO_INSTALL=n
 CONFIG_SAHARA_INSTALL=n
 
 # Specify 'y' to install OpenStack Orchestration (heat). ['y', 'n']
-CONFIG_HEAT_INSTALL=n
+CONFIG_HEAT_INSTALL=y
 
 # Specify 'y' to install OpenStack Container Infrastructure
 # Management Service (magnum). ['y', 'n']
