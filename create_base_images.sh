@@ -34,5 +34,9 @@ wget http://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.
 glance image-create --name Ubuntu-18-04 --architecture x86_64 --disk-format qcow2 --container-format bare --visibility public --protected True --min-disk 4 --file ./ubuntu-18.04.img
 rm ubuntu-18.04.img
 
+wget https://ftp.icm.edu.pl/pub/Linux/fedora/linux/releases/28/Cloud/x86_64/images/Fedora-Cloud-Base-28-1.1.x86_64.qcow2  -O fedora-28.img
+glance image-create --name Fedora-28 --architecture x86_64 --disk-format qcow2 --container-format bare --visibility public --protected True --min-disk 4 --file ./fedora-28.img
+rm fedora-28.img
+
 # to be able to remove image:
 # openstack image set <image name> --unprotected
