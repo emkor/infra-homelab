@@ -28,9 +28,9 @@ Network setup should have some spare addresses for OpenStack instances outside o
     - replaces NetworkManager with network service
     - disables firewalld
     - installs base OS dependencies (nano, vim, htop etc)
-- reboot the machine now, ssh to it again, enter the code dir with `cd openstack-on-hp-z600`
+- `reboot` the machine now, ssh to it again, enter the code dir with `cd openstack-on-hp-z600`
 - `./install.sh`
-    - installs raw OpenStack Queens with basic services using Packstack
+    - installs raw OpenStack Queens with basic services using Packstack with answers file defined under `files/packstack-answers.txt`
 - be patient!
 - `./post_install.sh`
     - creates "development" project

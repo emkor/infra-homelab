@@ -38,7 +38,7 @@ CONFIG_NEUTRON_INSTALL=y
 CONFIG_HORIZON_INSTALL=y
 
 # Specify 'y' to install OpenStack Object Storage (swift). ['y', 'n']
-CONFIG_SWIFT_INSTALL=n
+CONFIG_SWIFT_INSTALL=y
 
 # Specify 'y' to install OpenStack Metering (ceilometer). Note this
 # will also automatically install gnocchi service and configures it as
