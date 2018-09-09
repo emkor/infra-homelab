@@ -38,5 +38,10 @@ wget https://ftp.icm.edu.pl/pub/Linux/fedora/linux/releases/28/Cloud/x86_64/imag
 glance image-create --name Fedora-28 --architecture x86_64 --disk-format qcow2 --container-format bare --visibility public --protected True --min-disk 4 --file ./fedora-28.qcow2
 rm fedora-28.qcow2
 
+wget https://download.fedoraproject.org/pub/alt/atomic/stable/Fedora-28-updates-20180902.0/AtomicHost/x86_64/images/Fedora-AtomicHost-28-20180902.0.x86_64.qcow2 -O fedora-atomic-latest.qcow2
+glance image-create --name fedora-atomic-latest --os-distro fedora-atomic --architecture x86_64 --disk-format qcow2 --container-format bare --visibility public --protected True --min-disk 4 --file ./fedora-atomic-latest.qcow2
+rm fedora-atomic-latest.qcow2
+
+
 # to be able to remove image:
 # openstack image set <image name> --unprotected
