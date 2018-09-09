@@ -5,16 +5,17 @@ set -e
 cd ~/openstack-on-hp-z600
 
 # insert DNS addresses for OpenStack compute instances so those can reach Internet
-sed -i "s/#dnsmasq_dns_servers =/dnsmasq_dns_servers = 192.168.192.254/g" /etc/neutron/dhcp_agent.ini
+#sed -i "s/#dnsmasq_dns_servers =/dnsmasq_dns_servers = 192.168.192.254, 1.1.1.1, 8.8.8.8, 8.8.4.4, 208.69.38.205/g" /etc/neutron/dhcp_agent.ini
 
 mkdir -p ~/.ssh
 cp ./files/ssh_config ~/.ssh/config
 
 cd ~
 source ~/keystonerc_admin
+
 neutron net-create external_network --provider:network_type flat --provider:physical_network extnet  --router:external --shared
 neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.193.1,end=192.168.193.250 \
-                        --gateway=192.168.192.254 external_network 192.168.192.0/23
+                        --gateway=192.168.192.254 external_network 192.168.192.0/23 --dns-namservers 1.1.1.1,8.8.8.8,8.8.4.4,208.69.38.205
 
 openstack project create --enable development
 openstack role add --user admin --project development admin
@@ -22,7 +23,7 @@ openstack user create --project development --password guest --enable guest
 openstack role add --user guest --project development _member_
 openstack quota set --instances 40 --key-pairs 20 --floating-ips 40 --cores 80 --ram 40960 --gigabytes 400 --volumes 20 --per-volume-gigabytes 40 --snapshots 40 development
 
-export OS_PROJECT_NAME=development
+source ./files/keystonerc_guest
 
 neutron router-create main_router
 neutron router-gateway-set main_router external_network
