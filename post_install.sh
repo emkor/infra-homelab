@@ -17,12 +17,11 @@ neutron net-create external_network --provider:network_type flat --provider:phys
 neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.193.1,end=192.168.193.250 \
                         --gateway=192.168.192.254 external_network 192.168.192.0/23
 
-
 openstack project create --enable development
 openstack role add --user admin --project development admin
 openstack user create --project development --password guest --enable guest
 openstack role add --user guest --project development _member_
-openstack quota set --instances 40 --key-pairs 20 --floating-ips 40 --cores 80 --ram 40960 --gigabytes 400 --volumes 20 --per-volume-gigabytes 40 --snapshots 40 development
+openstack quota set --instances 40 --key-pairs 20 --floating-ips 40 --cores 40 --ram 40960 --gigabytes 400 --volumes 20 --per-volume-gigabytes 40 --snapshots 40 development
 
 export OS_PROJECT_NAME=development
 
@@ -46,25 +45,21 @@ openstack security group rule create --egress --protocol tcp --dst-port 1:65535 
 
 # re-create default m1 flavors
 openstack flavor delete m1.tiny
-openstack flavor create --public --vcpus=1 --ram=512 --disk=2 m1.tiny
+openstack flavor create --public --vcpus=1 --ram=1024 --disk=5 m1.tiny
 openstack flavor delete m1.small
-openstack flavor create --public --vcpus=1 --ram=1024 --disk=5 m1.small
+openstack flavor create --public --vcpus=2 --ram=2048 --disk=10 m1.small
 openstack flavor delete m1.medium
-openstack flavor create --public --vcpus=2 --ram=2048 --disk=10 m1.medium
+openstack flavor create --public --vcpus=4 --ram=4096 --disk=20 m1.medium
 openstack flavor delete m1.large
-openstack flavor create --public --vcpus=4 --ram=4096 --disk=20 m1.large
+openstack flavor create --public --vcpus=8 --ram=8192 --disk=40 m1.large
 openstack flavor delete m1.xlarge
-openstack flavor create --public --vcpus=8 --ram=8192 --disk=40 m1.xlarge
-#openstack flavor delete m1.xxlarge
-openstack flavor create --public --vcpus=16 --ram=16384 --disk=80 m1.xxlarge
-
-# create compute-specific c1 flavors
-openstack flavor create --public --vcpus=2 --ram=1024 --disk=2 c1.small
-openstack flavor create --public --vcpus=4 --ram=2048 --disk=4 c1.medium
-openstack flavor create --public --vcpus=8 --ram=4096 --disk=8 c1.large
-openstack flavor create --public --vcpus=16 --ram=8192 --disk=16 c1.xlarge
-openstack flavor create --public --vcpus=32 --ram=16384 --disk=32 c1.xxlarge
+openstack flavor create --public --vcpus=16 --ram=16384 --disk=80 m1.xlarge
+openstack flavor create --public --vcpus=24 --ram=24576 --disk=120 m1.xxlarge
 
 cd ~/openstack-on-hp-z600
 source ./files/keystonerc_guest
 openstack keypair create --public-key ./files/openstack-hpz600.pub openstack-hpz600
+
+# 40 GB RAM
+# 220 GB SSD
+# 40 vCPU
