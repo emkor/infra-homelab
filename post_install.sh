@@ -59,7 +59,3 @@ openstack flavor create --public --vcpus=24 --ram=24576 --disk=120 m1.xxlarge
 cd ~/openstack-on-hp-z600
 source ./files/keystonerc_guest
 openstack keypair create --public-key ./files/openstack-hpz600.pub openstack-hpz600
-
-# 40 GB RAM
-# 220 GB SSD
-# 40 vCPU
