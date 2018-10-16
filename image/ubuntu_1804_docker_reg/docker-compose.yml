@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+  docker-registry:
+    image: registry:2
+    restart: always
+    environment:
+      REGISTRY_HTTP_TLS_CERTIFICATE: /certs/ca.crt
+      REGISTRY_HTTP_TLS_KEY: /certs/domain.key
+    ports:
+    - 443:5000
+    volumes:
+    - /home/ubuntu/certs:/certs
+    - /mnt/docker_volume:/var/lib/registry
+    - /home/ubuntu/registry_config.yml:/etc/docker/registry/config.yml:ro
