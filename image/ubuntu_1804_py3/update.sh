@@ -3,12 +3,13 @@
 set -e
 
 sudo apt-get update
-sudo apt-get install -y curl make
+sudo apt-get install -y curl make zip
 sudo apt-get install -y python3-venv python3-distutils
 
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 sudo python3 get-pip.py
 
+rm -rf ./get-pip.py
 sudo apt clean -y
 sudo apt autoclean -y
 sudo apt autoremove -y
