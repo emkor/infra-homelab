@@ -4,7 +4,7 @@ set -e
 
 # pre install
 sudo apt-get update
-sudo apt-get install -y curl make
+sudo apt-get install -y curl make zip
 sudo apt-get install -y apt-transport-https ca-certificates software-properties-common
 
 sudo add-apt-repository \
