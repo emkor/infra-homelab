@@ -26,7 +26,7 @@ openstack quota set --instances 40 --key-pairs 20 --floating-ips 40 --cores 40 -
 export OS_PROJECT_NAME=development
 
 neutron router-create main_router
-neutron router-gateway-set main_router external_network
+neutron router-gateway-set --fixed-ip ip_address=192.168.193.254 main_router external_network
 
 neutron net-create private_network
 neutron subnet-create --name private_subnet private_network 172.16.0.0/16
