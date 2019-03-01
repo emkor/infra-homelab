@@ -36,6 +36,10 @@ openstack floating ip create --floating-ip-address 192.168.193.1 external_networ
 openstack floating ip create --floating-ip-address 192.168.193.2 external_network
 openstack floating ip create --floating-ip-address 192.168.193.3 external_network
 openstack floating ip create --floating-ip-address 192.168.193.4 external_network
+openstack floating ip create --floating-ip-address 192.168.193.5 external_network
+openstack floating ip create --floating-ip-address 192.168.193.6 external_network
+openstack floating ip create --floating-ip-address 192.168.193.7 external_network
+openstack floating ip create --floating-ip-address 192.168.193.8 external_network
 
 openstack security group create --description "TCP ports (range 1-65535) + ICMP opened" --project development all-open
 openstack security group rule create --ingress --protocol icmp --remote-ip 0.0.0.0/0 --project development all-open
