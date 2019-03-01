@@ -42,6 +42,8 @@ openstack security group rule create --ingress --protocol icmp --remote-ip 0.0.0
 openstack security group rule create --egress --protocol icmp --remote-ip 0.0.0.0/0 --project development all-open
 openstack security group rule create --ingress --protocol tcp --dst-port 1:65535 --remote-ip 0.0.0.0/0 --project development all-open
 openstack security group rule create --egress --protocol tcp --dst-port 1:65535 --remote-ip 0.0.0.0/0 --project development all-open
+openstack security group rule create --ingress --protocol udp --dst-port 1:65535 --remote-ip 0.0.0.0/0 --project development all-open
+openstack security group rule create --egress --protocol udp --dst-port 1:65535 --remote-ip 0.0.0.0/0 --project development all-open
 
 # re-create default m1 flavors
 openstack flavor delete m1.tiny
