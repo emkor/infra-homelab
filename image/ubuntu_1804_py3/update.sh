@@ -14,6 +14,8 @@ sudo apt clean -y
 sudo apt autoclean -y
 sudo apt autoremove -y
 
+sudo ln -s /usr/bin/python3 /usr/bin/python
+
 echo 'Done!'
 history -c
 
