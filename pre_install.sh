@@ -15,8 +15,13 @@ systemctl stop NetworkManager
 systemctl enable network
 systemctl start network
 
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python get-pip.py
+rm -f get-pip.py
+
 # for some reason, pip did not worked correctly out of the box in CentOS
 wget https://bootstrap.pypa.io/ez_setup.py -O - | python
+rm -f ./setuptools-*.zip
 
 # disable SELinux
 sed -i "s/SELINUX=.*/SELINUX=permissive/g" /etc/sysconfig/selinux
