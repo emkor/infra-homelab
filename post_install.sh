@@ -5,7 +5,7 @@ set -e
 cd ~/openstack-on-hp-z600
 
 # insert DNS addresses for OpenStack compute instances so those can reach Internet
-sed -i "s/#dnsmasq_dns_servers =/dnsmasq_dns_servers = 192.168.192.254, 1.1.1.1, 8.8.8.8, 8.8.4.4, 208.69.38.205/g" /etc/neutron/dhcp_agent.ini
+sed -i "s/#dnsmasq_dns_servers =/dnsmasq_dns_servers = 192.168.192.254, 1.1.1.1, 8.8.8.8, 8.8.4.4, 208.67.222.222, 208.67.220.220/g" /etc/neutron/dhcp_agent.ini
 
 mkdir -p ~/.ssh
 cp ./files/ssh_config ~/.ssh/config
@@ -14,7 +14,7 @@ cd ~
 source ~/keystonerc_admin
 
 neutron net-create external_network --provider:network_type flat --provider:physical_network extnet --router:external --shared
-neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.193.1,end=192.168.193.250 \
+neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.193.1,end=192.168.193.99 \
                         --gateway=192.168.192.254 external_network 192.168.192.0/23
 
 openstack project create --enable development
@@ -40,6 +40,8 @@ openstack floating ip create --floating-ip-address 192.168.193.5 external_networ
 openstack floating ip create --floating-ip-address 192.168.193.6 external_network
 openstack floating ip create --floating-ip-address 192.168.193.7 external_network
 openstack floating ip create --floating-ip-address 192.168.193.8 external_network
+openstack floating ip create --floating-ip-address 192.168.193.9 external_network
+openstack floating ip create --floating-ip-address 192.168.193.10 external_network
 
 openstack security group create --description "TCP ports (range 1-65535) + ICMP opened" --project development all-open
 openstack security group rule create --ingress --protocol icmp --remote-ip 0.0.0.0/0 --project development all-open
