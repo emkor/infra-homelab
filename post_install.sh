@@ -4,11 +4,9 @@ set -e
 
 cd ~/openstack-on-hp-z600
 
-# insert DNS addresses for OpenStack compute instances so those can reach Internet
-# TODO: https://docs.openstack.org/neutron/stein/admin/config-dns-res.html
-# TODO: on Stein, you mast ADD these lines, not replace commented ones!
-sed -i "s/#dnsmasq_dns_servers =/dnsmasq_dns_servers = 192.168.192.254, 1.1.1.1, 8.8.8.8, 8.8.4.4, 208.67.222.222, 208.67.220.220/g" /etc/neutron/dhcp_agent.ini
-
+# insert DNS addresses for whole OpenStack installation so VMs can reach Internet through server names
+# steps taken from: https://docs.openstack.org/neutron/stein/admin/config-dns-res.html
+echo "dnsmasq_dns_servers = 192.168.192.254, 1.1.1.1, 8.8.8.8, 8.8.4.4, 208.67.222.222, 208.67.220.220" | sudo tee -a /etc/neutron/dhcp_agent.ini
 
 mkdir -p ~/.ssh
 cp ./files/ssh_config ~/.ssh/config
