@@ -9,13 +9,13 @@ cd ~/openstack-on-hp-z600
 echo "dnsmasq_dns_servers = 192.168.192.254, 1.1.1.1, 8.8.8.8, 8.8.4.4, 208.67.222.222, 208.67.220.220" | sudo tee -a /etc/neutron/dhcp_agent.ini
 
 mkdir -p ~/.ssh
-cp ./files/ssh_config ~/.ssh/config
+cp ./files/.ssh/* ~/.ssh/
 
 cd ~
 source ~/keystonerc_admin
 
 neutron net-create external_network --provider:network_type flat --provider:physical_network extnet --router:external --shared
-neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.193.1,end=192.168.193.99 \
+neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.193.1,end=192.168.193.254 \
                         --gateway=192.168.192.254 external_network 192.168.192.0/23
 
 openstack project create --enable development
@@ -77,5 +77,5 @@ openstack flavor create --public --vcpus=16 --ram=16384 --disk=80 m1.xlarge
 openstack flavor create --public --vcpus=24 --ram=24576 --disk=120 m1.xxlarge
 
 cd ~/openstack-on-hp-z600
-source ./files/keystonerc_guest
+source keystonerc_guest
 openstack keypair create --public-key ./files/openstack-hpz600.pub openstack-hpz600

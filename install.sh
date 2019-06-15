@@ -9,4 +9,4 @@ yum-config-manager --enable openstack-stein
 yum update -y
 yum install -y openstack-packstack
 
-packstack --answer-file=~/openstack-on-hp-z600/files/packstack-answers.txt
+packstack --answer-file=./packstack-answers.txt
