@@ -43,6 +43,8 @@ sudo cp ca.crt "/etc/docker/certs.d/docker-registry.cloud.local/"
 sudo cp daemon.json /etc/docker/daemon.json
 sudo systemctl restart docker
 
+sudo systemctl mask apt-daily.service apt-daily-upgrade.service
+
 docker --version
 docker-compose --version
 ctop -v

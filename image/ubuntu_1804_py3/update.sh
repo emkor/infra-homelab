@@ -2,6 +2,7 @@
 
 set -e
 
+sudo systemctl mask apt-daily.service apt-daily-upgrade.service
 sudo apt-get update
 sudo apt-get install -y curl make zip
 sudo apt-get install -y python3-venv python3-distutils
