@@ -2,6 +2,16 @@
 
 set -e
 
+# disable annoying apt-daily-upgrade.service
+sudo systemctl mask apt-daily.service apt-daily-upgrade.service
+sudo systemctl stop apt-daily.service
+sudo systemctl kill --kill-who=all apt-daily.service
+# wait until `apt-get updated` has been killed
+while ! (sudo systemctl list-units --all apt-daily.service | fgrep -q dead)
+do
+  sleep 1;
+done
+
 # pre install
 sudo apt-get update
 sudo apt-get install -y curl make zip
@@ -14,10 +24,7 @@ sudo apt-get install -y \
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
-sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
 # install docker
 sudo apt-get update
@@ -36,14 +43,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo wget https://github.com/bcicen/ctop/releases/download/v0.7.2/ctop-0.7.2-linux-amd64 -O /usr/local/bin/ctop
 sudo chmod +x /usr/local/bin/ctop
 
-# include custom docker registry certificate file (ca.crt)
-echo "192.168.193.1 docker-registry.cloud.local" | sudo tee -a /etc/hosts
-sudo mkdir -p "/etc/docker/certs.d/docker-registry.cloud.local"
-sudo cp ca.crt "/etc/docker/certs.d/docker-registry.cloud.local/"
-sudo cp daemon.json /etc/docker/daemon.json
 sudo systemctl restart docker
-
-sudo systemctl mask apt-daily.service apt-daily-upgrade.service
 
 docker --version
 docker-compose --version
