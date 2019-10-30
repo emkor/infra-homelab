@@ -1,0 +1,12 @@
+credentials:
+  openstack-teczowa:
+    admin:
+      auth-type: userpass
+      username: admin
+      password: ADMIN_PASSWORD
+      tenant-name: admin
+    guest:
+      auth-type: userpass
+      username: guest
+      password: guest
+      tenant-name: development

@@ -1,0 +1,7 @@
+clouds:
+  openstack-teczowa:
+    type: openstack
+    auth-types: [access-key,userpass]
+    regions:
+      RegionOne:
+        endpoint: http://192.168.192.250:5000/v3
