@@ -33,8 +33,7 @@ neutron net-create private_network
 neutron subnet-create --name private_subnet private_network 172.16.0.0/16
 neutron router-interface-add main_router private_subnet
 
-openstack floating ip create --floating-ip-address 192.168.193.1 external_network
-openstack floating ip create --floating-ip-address 192.168.193.2 external_networkopenstack flavor delete m1.tiny
+openstack flavor delete m1.tiny
 openstack flavor create --public --vcpus=1 --ram=1024 --disk=5 m1.tiny
 openstack flavor delete m1.small
 openstack flavor create --public --vcpus=2 --ram=2048 --disk=10 m1.small
@@ -46,6 +45,8 @@ openstack flavor delete m1.xlarge
 openstack flavor create --public --vcpus=16 --ram=16384 --disk=80 m1.xlarge
 openstack flavor create --public --vcpus=24 --ram=24576 --disk=120 m1.xxlarge
 
+openstack floating ip create --floating-ip-address 192.168.193.1 external_network
+openstack floating ip create --floating-ip-address 192.168.193.2 external_network
 openstack floating ip create --floating-ip-address 192.168.193.3 external_network
 openstack floating ip create --floating-ip-address 192.168.193.4 external_network
 openstack floating ip create --floating-ip-address 192.168.193.5 external_network
@@ -62,19 +63,6 @@ openstack security group rule create --ingress --protocol tcp --dst-port 1:65535
 openstack security group rule create --egress --protocol tcp --dst-port 1:65535 --remote-ip 0.0.0.0/0 --project development all-open
 openstack security group rule create --ingress --protocol udp --dst-port 1:65535 --remote-ip 0.0.0.0/0 --project development all-open
 openstack security group rule create --egress --protocol udp --dst-port 1:65535 --remote-ip 0.0.0.0/0 --project development all-open
-
-# re-create default m1 flavors
-openstack flavor delete m1.tiny
-openstack flavor create --public --vcpus=1 --ram=1024 --disk=5 m1.tiny
-openstack flavor delete m1.small
-openstack flavor create --public --vcpus=2 --ram=2048 --disk=10 m1.small
-openstack flavor delete m1.medium
-openstack flavor create --public --vcpus=4 --ram=4096 --disk=20 m1.medium
-openstack flavor delete m1.large
-openstack flavor create --public --vcpus=8 --ram=8192 --disk=40 m1.large
-openstack flavor delete m1.xlarge
-openstack flavor create --public --vcpus=16 --ram=16384 --disk=80 m1.xlarge
-openstack flavor create --public --vcpus=24 --ram=24576 --disk=120 m1.xxlarge
 
 cd ~/openstack-on-hp-z600
 source keystonerc_guest
