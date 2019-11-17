@@ -3,7 +3,7 @@
 set -e
 
 yum install -y epel-release
-yum install -y sudo wget curl nano vim htop openstack-utils
+yum install -y sudo wget curl nano vim htop openstack-utils net-tools
 
 # disable firewalld
 systemctl disable firewalld

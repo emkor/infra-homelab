@@ -262,9 +262,9 @@ CONFIG_SSL_CERT_SUBJECT_O=openstack
 CONFIG_SSL_CERT_SUBJECT_OU=packstack
 
 # Enter the ssl certificates subject common name.
-CONFIG_SSL_CERT_SUBJECT_CN=hp-z600.lan
+CONFIG_SSL_CERT_SUBJECT_CN=lenovo-c30.lan
 
-CONFIG_SSL_CERT_SUBJECT_MAIL=admin@hp-z600.lan
+CONFIG_SSL_CERT_SUBJECT_MAIL=admin@lenovo-c30.lan
 
 # Service to be used as the AMQP broker. Allowed values are: rabbitmq
 # ['rabbitmq']
@@ -554,7 +554,7 @@ CONFIG_CINDER_VOLUME_NAME=cinder-volumes
 # of the volume group will restrict the amount of disk space that you
 # can expose to Compute instances, and that the specified amount must
 # be available on the device used for /var/lib/cinder.
-CONFIG_CINDER_VOLUMES_SIZE=40G
+CONFIG_CINDER_VOLUMES_SIZE=32G
 
 # A single or comma-separated list of Red Hat Storage (gluster)
 # volume shares to mount. Example: 'ip-address:/vol-name', 'domain
