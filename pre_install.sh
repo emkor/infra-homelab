@@ -2,8 +2,13 @@
 
 set -e
 
+mkdir -p .terminfo/r
+# on client
+scp /usr/share/terminfo/r/rxvt-unicode-256color c30:.terminfo/r/
+
 yum install -y epel-release
 yum install -y sudo wget curl nano vim htop openstack-utils net-tools
+yum update -y
 
 # disable firewalld
 systemctl disable firewalld
@@ -28,3 +33,8 @@ sed -i "s/SELINUX=.*/SELINUX=permissive/g" /etc/sysconfig/selinux
 sed -i "s/SELINUXTYPE=.*/SELINUXTYPE=targeted/g" /etc/sysconfig/selinux
 sed -i "s/SELINUX=.*/SELINUX=permissive/g" /etc/selinux/config
 sed -i "s/SELINUXTYPE=.*/SELINUXTYPE=targeted/g" /etc/selinux/config
+
+# echo name of the host to /etc/hosts (RabbitMQ cannot start server on "lenovo-c30" cause it doesn't know what host is this)
+echo "127.0.0.1    lenovo-c30" >> /etc/hosts
+
+# reboot
