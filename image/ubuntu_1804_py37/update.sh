@@ -5,7 +5,6 @@ set -e
 sudo apt update
 sudo apt-get install -y curl make zip software-properties-common
 sudo apt install -y python3.7 python3.7-venv python3-distutils
-sudo apt install -y python3-distutils
 
 sudo ln -s /usr/bin/python3.7 /usr/bin/python
 

@@ -5,7 +5,6 @@ set -e
 sudo apt update
 sudo apt-get install -y curl make zip software-properties-common
 sudo apt install -y python3.8 python3.8-venv python3-distutils
-sudo apt install -y python3-distutils
 
 sudo ln -s /usr/bin/python3.8 /usr/bin/python
 
