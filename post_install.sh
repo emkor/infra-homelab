@@ -16,7 +16,7 @@ source ~/keystonerc_admin
 
 neutron net-create external_network --provider:network_type flat --provider:physical_network extnet --router:external --shared
 neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.193.1,end=192.168.193.254 \
-                        --gateway=192.168.192.254 external_network 192.168.192.0/23
+  --gateway=192.168.192.254 external_network 192.168.192.0/23
 
 openstack project create --enable development
 openstack role add --user admin --project development admin
@@ -57,12 +57,47 @@ openstack floating ip create --floating-ip-address 192.168.193.9 external_networ
 openstack floating ip create --floating-ip-address 192.168.193.10 external_network
 
 openstack security group create --description "TCP+UDP+ICMP opened (ports 1-65535)" --project development all-open
-openstack security group rule create --ingress --protocol icmp --remote-ip 0.0.0.0/0 --project development all-open
+openstack security group rule create --ingress --protocol icmp --remote-ip 10.0.0.0/8 --project development all-open
 openstack security group rule create --egress --protocol icmp --remote-ip 0.0.0.0/0 --project development all-open
 openstack security group rule create --ingress --protocol tcp --dst-port 1:65535 --remote-ip 0.0.0.0/0 --project development all-open
 openstack security group rule create --egress --protocol tcp --dst-port 1:65535 --remote-ip 0.0.0.0/0 --project development all-open
 openstack security group rule create --ingress --protocol udp --dst-port 1:65535 --remote-ip 0.0.0.0/0 --project development all-open
 openstack security group rule create --egress --protocol udp --dst-port 1:65535 --remote-ip 0.0.0.0/0 --project development all-open
+
+openstack security group create --description "No Internet access" --project development no-internet
+
+# delete default rules which include opening to everything
+for sgr in $(openstack security group rule list -c ID -f value no-internet); do openstack security group rule delete $sgr; done
+
+openstack security group rule create --ingress --protocol icmp --remote-ip 10.0.0.0/8 --project development no-internet
+openstack security group rule create --ingress --protocol icmp --remote-ip 172.16.0.0/12 --project development no-internet
+openstack security group rule create --ingress --protocol icmp --remote-ip 192.168.0.0/16 --project development no-internet
+openstack security group rule create --ingress --protocol icmp --remote-ip 169.254.0.0/16 --project development no-internet
+
+openstack security group rule create --egress --protocol icmp --remote-ip 10.0.0.0/8 --project development no-internet
+openstack security group rule create --egress --protocol icmp --remote-ip 172.16.0.0/12 --project development no-internet
+openstack security group rule create --egress --protocol icmp --remote-ip 192.168.0.0/16 --project development no-internet
+openstack security group rule create --egress --protocol icmp --remote-ip 169.254.0.0/16 --project development no-internet
+
+openstack security group rule create --ingress --protocol tcp --dst-port 1:65535 --remote-ip 10.0.0.0/8 --project development no-internet
+openstack security group rule create --ingress --protocol tcp --dst-port 1:65535 --remote-ip 172.16.0.0/12 --project development no-internet
+openstack security group rule create --ingress --protocol tcp --dst-port 1:65535 --remote-ip 192.168.0.0/16 --project development no-internet
+openstack security group rule create --ingress --protocol tcp --dst-port 1:65535 --remote-ip 169.254.0.0/16 --project development no-internet
+
+openstack security group rule create --egress --protocol tcp --dst-port 1:65535 --remote-ip 10.0.0.0/8 --project development no-internet
+openstack security group rule create --egress --protocol tcp --dst-port 1:65535 --remote-ip 172.16.0.0/12 --project development no-internet
+openstack security group rule create --egress --protocol tcp --dst-port 1:65535 --remote-ip 192.168.0.0/16 --project development no-internet
+openstack security group rule create --egress --protocol tcp --dst-port 1:65535 --remote-ip 169.254.0.0/16 --project development no-internet
+
+openstack security group rule create --ingress --protocol udp --dst-port 1:65535 --remote-ip 10.0.0.0/8 --project development no-internet
+openstack security group rule create --ingress --protocol udp --dst-port 1:65535 --remote-ip 172.16.0.0/12 --project development no-internet
+openstack security group rule create --ingress --protocol udp --dst-port 1:65535 --remote-ip 192.168.0.0/16 --project development no-internet
+openstack security group rule create --ingress --protocol udp --dst-port 1:65535 --remote-ip 169.254.0.0/16 --project development no-internet
+
+openstack security group rule create --egress --protocol udp --dst-port 1:65535 --remote-ip 10.0.0.0/8 --project development no-internet
+openstack security group rule create --egress --protocol udp --dst-port 1:65535 --remote-ip 172.16.0.0/12 --project development no-internet
+openstack security group rule create --egress --protocol udp --dst-port 1:65535 --remote-ip 192.168.0.0/16 --project development no-internet
+openstack security group rule create --egress --protocol udp --dst-port 1:65535 --remote-ip 169.254.0.0/16 --project development no-internet
 
 cd ~/openstack-on-hp-z600
 source keystonerc_guest
