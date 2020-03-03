@@ -9,7 +9,8 @@ resource "openstack_compute_instance_v2" "vm" {
   image_name = var.image
   flavor_name = var.flavor
   key_pair = var.ssh_key_pair
-  security_groups = [var.security_group]
+  security_groups = [
+    var.security_group]
   network {
     name = var.network_name
   }
@@ -30,22 +31,26 @@ resource "null_resource" "vm_init" {
   ]
 
   connection {
+    type = "ssh"
     user = var.ssh_user_name
     private_key = file(var.ssh_key_path)
     host = openstack_networking_floatingip_v2.vm_fip.*.address[count.index]
+    timeout = "1m"
+    agent = false
   }
 
   provisioner "file" {
     source = var.vm_init_script
-    destination = "/tmp/init.sh"
+    destination = "/tmp/wait-for.sh"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "chmod +x /tmp/init.sh",
-      "/tmp/init.sh"
+      "chmod +x /tmp/wait-for.sh",
+      "/tmp/wait-for.sh localhost:22 -t 60"
     ]
   }
+
 }
 
 output "vm_ips" {

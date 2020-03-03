@@ -39,5 +39,5 @@ variable "instance_prefix" {
 }
 
 variable "vm_init_script" {
-  default = "image/disable_ubuntu_daily_upgrades.sh"
+  default = "wait-for.sh"
 }
