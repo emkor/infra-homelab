@@ -2,20 +2,14 @@
 
 set -e
 
-cd ~/openstack-on-hp-z600
+source ~/keystonerc_admin
 
 # insert DNS addresses for whole OpenStack installation so VMs can reach Internet through server names
 # steps taken from: https://docs.openstack.org/neutron/stein/admin/config-dns-res.html
 echo "dnsmasq_dns_servers = 192.168.192.1" | sudo tee -a /etc/neutron/dhcp_agent.ini
 
-mkdir -p ~/.ssh
-cp ./files/.ssh/* ~/.ssh/
-
-cd ~
-source ~/keystonerc_admin
-
 neutron net-create external_network --provider:network_type flat --provider:physical_network extnet --router:external --shared
-neutron subnet-creazte --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.193.1,end=192.168.193.199 \
+neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.193.1,end=192.168.193.199 \
   --gateway=192.168.192.1 external_network 192.168.192.0/23
 
 openstack project create --enable development
@@ -98,7 +92,3 @@ openstack security group rule create --egress --protocol udp --dst-port 1:65535 
 openstack security group rule create --egress --protocol udp --dst-port 1:65535 --remote-ip 172.16.0.0/12 --project development no-internet
 openstack security group rule create --egress --protocol udp --dst-port 1:65535 --remote-ip 192.168.0.0/16 --project development no-internet
 openstack security group rule create --egress --protocol udp --dst-port 1:65535 --remote-ip 169.254.0.0/16 --project development no-internet
-
-cd ~/openstack-on-hp-z600
-source keystonerc_guest
-openstack keypair create --public-key ./files/openstack-hpz600.pub openstack-hpz600
