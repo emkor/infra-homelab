@@ -27,6 +27,10 @@ wget http://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.
 glance image-create --name "ubuntu-18.04-$(date -u --rfc-3339=date)" --architecture x86_64 --disk-format qcow2 --container-format bare --visibility public --protected True --min-disk 4 --file ./ubuntu-18.04.img
 rm ubuntu-18.04.img
 
+wget https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img -O ubuntu-20.04.img
+glance image-create --name "ubuntu-20.04-$(date -u --rfc-3339=date)" --architecture x86_64 --disk-format qcow2 --container-format bare --visibility public --protected True --min-disk 4 --file ./ubuntu-20.04.img
+rm ubuntu-20.04.img
+
 # to be able to remove image:
 # openstack image set IMAGE_NAME --unprotected
 # openstack image delete IMAGE_NAME
