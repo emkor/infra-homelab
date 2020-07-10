@@ -1,5 +1,5 @@
 variable "image" {
-  default = "ubuntu18.04-docker19.03-2020-01-13"
+  default = "ubuntu-20.04-docker-19.03-2020-05-02"
 }
 
 variable "flavor" {
@@ -7,7 +7,7 @@ variable "flavor" {
 }
 
 variable "vm_count" {
-  default = 2
+  default = 3
 }
 
 variable "ssh_key_pair" {

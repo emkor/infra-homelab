@@ -1,7 +1,7 @@
 unset OS_SERVICE_TOKEN
 export OS_USERNAME=guest
 export OS_PASSWORD='guest'
-export OS_AUTH_URL=http://192.168.192.250:5000/v3
+export OS_AUTH_URL=http://192.168.192.4:5000/v3
 export OS_PROJECT_NAME=development
 export OS_USER_DOMAIN_NAME=Default
 export OS_PROJECT_DOMAIN_NAME=Default
